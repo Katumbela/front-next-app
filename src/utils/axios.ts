@@ -8,8 +8,8 @@ const createAuthorizedAxiosInstance = () => {
   const token = getCookie('token');
   const csrfToken = getCookie('X-CSRF-TOKEN');
 
-  console.log('Token:', token);
-  console.log('CSRF Token:', csrfToken);
+  //console.log('Token:', token);
+  //console.log('CSRF Token:', csrfToken);
 
   const instance = axios.create({
     baseURL: API_URL,

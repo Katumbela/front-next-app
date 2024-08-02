@@ -11,8 +11,8 @@ export const createService = async (title: string, description: string, price: n
 };
 
 export const getServices = async (): Promise<Service[]> => {
-  // return authorizedRequest(API_URL, 'GET');
-  return axios.get(API_URL)
+   return authorizedRequest(API_URL, 'GET');
+  // return axios.get(API_URL)
 };
 
 export const updateService = async (id: string, title: string, description: string, price: number): Promise<Service> => {
