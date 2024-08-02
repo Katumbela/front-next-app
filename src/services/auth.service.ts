@@ -1,15 +1,20 @@
+import { env } from '@/infra/config/env';
+import { IUser } from '@/infra/interfacess/user';
 import { getCookie, setCookie } from '@/utils/cookies';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+
+const API_ROUTE = env.apiUrl;
 
 
-const API_URL = '/api/auth';
+export const login = async (email: string, password: string): Promise<any> => {
 
-interface LoginResponse {
-  token: string;
-}
+  const response: AxiosResponse = await axios.post(
+    `${API_ROUTE}/auth/login`,
+    { email, password },
+    { withCredentials: true }
+  );
 
-export const login = async (email: string, password: string): Promise<void> => {
-  const response = await axios.post<LoginResponse>(`${API_URL}/login`, { email, password }, { withCredentials: true });
+  console.log(response)
   const { token } = response.data;
 
   // Armazenar o token JWT no cookie
@@ -20,8 +25,13 @@ export const login = async (email: string, password: string): Promise<void> => {
   if (csrfToken) {
     setCookie('X-CSRF-TOKEN', csrfToken);
   }
+
+  return { response };
+
 };
 
-export const register = async (email: string, password: string): Promise<void> => {
-  await axios.post(`${API_URL}/register`, { email, password });
+
+
+export const register = async (user: IUser): Promise<void> => {
+  await axios.post(`${API_ROUTE}/users`, user);
 };

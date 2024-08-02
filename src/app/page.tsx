@@ -1,28 +1,27 @@
-
-
 "use client";
 
 import { useState } from 'react';
-// import toast from "react-hot-toast";
 import { login } from '@/services/auth.service';
-
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true)
-    try {
-      await login(email, password);
-      setLoading(false)
-    } catch (error) {
-      setLoading(false)
-      setError('Falha ao fazer login. Verifique suas credenciais.');
-      console.error('Login error:', error);
+    setLoading(true);
+    const response = await login(email, password);
+
+    if (response.status === 201) {
+      console.log('Logado com sucesso!');
+      setLoading(false); 
+      console.log(response.data);
+    } else {
+      setLoading(false);
+      console.log(response.response.message)
+      setError(response.data);
     }
   };
 
@@ -52,14 +51,9 @@ const Login = () => {
             required
           />
         </div>
-        {error && <p className='text-red-600 text-xs text-center  mt-2'>{error}</p>}
+        {error && <p className='text-red-600 text-xs text-center mt-2'>{error}</p>}
         <button className='bg-black hover:bg-black/80 transition-all w-full py-2 mt-4 text-lg font-semibold ' type="submit">
-          {
-            loading ?
-              'Entrando...'
-              :
-              'Login'
-          }
+          {loading ? 'Entrando...' : 'Login'}
         </button>
       </form>
     </div>
