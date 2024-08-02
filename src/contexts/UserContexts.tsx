@@ -1,12 +1,11 @@
 "use client"
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { IUser } from '@/infra/interfacess/user';
-import { setCookie, getCookie } from '@/utils/cookies';
-import { getLocalStorage, setLocalStorage } from '@/utils/local-storage';
-import axios, { AxiosResponse } from 'axios';
+import { getCookie } from '@/utils/cookies';
+import { setLocalStorage } from '@/utils/local-storage';
+import axios from 'axios';
 import { env } from '@/infra/config/env';
 import { useRouter } from 'next/navigation';
-
 
 const API_ROUTE = env.apiUrl;
 
@@ -14,6 +13,7 @@ interface UserContextType {
   user: IUser | null;
   login: (email: string, password: string) => Promise<any>;
   register: (user: IUser) => Promise<void>;
+  logout: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -92,8 +92,12 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }
   };
 
+  const logout = async () => {
+    localStorage.removeItem('user')
+  }
+
   return (
-    <UserContext.Provider value={{ user, login, register }}>
+    <UserContext.Provider value={{ user, login, register, logout }}>
       {children}
     </UserContext.Provider>
   );
