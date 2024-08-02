@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { getCookie } from './cookies';  // Certifique-se de que o caminho está correto
+import { getLocalStorage } from './local-storage';
 
 const API_URL = '/api';
 
 // Função para criar uma instância autorizada do Axios
 const createAuthorizedAxiosInstance = () => {
-  const token = getCookie('token');
+  const token = getLocalStorage('token');
   const csrfToken = getCookie('X-CSRF-TOKEN');
 
   //console.log('Token:', token);

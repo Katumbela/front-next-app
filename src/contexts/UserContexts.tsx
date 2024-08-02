@@ -48,9 +48,9 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       //console.log('Redirecting to /');
       router.push('/');
     }
-    else {
+    /*if(location.pathname == '/' && user) {
       router.push('/services/list')
-    }
+    }*/
   }, [user, router]);
 
 

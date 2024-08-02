@@ -13,7 +13,7 @@ import useSWR from 'swr';
 
 const fetcher = () => getServices();
 
-const ServiceList = () => {
+const MyServices = () => {
     const { data, error } = useSWR('/services', fetcher);
     const { user, logout } = useUser()
     if (error) return <div>Failed to load</div>;
@@ -56,4 +56,4 @@ const ServiceList = () => {
     );
 };
 
-export default ServiceList;
+export default MyServices;
