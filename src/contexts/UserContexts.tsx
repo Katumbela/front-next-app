@@ -43,7 +43,7 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    console.log(user)
+    //console.log(user)
     if (!user) {
       //console.log('Redirecting to /');
       router.push('/');
