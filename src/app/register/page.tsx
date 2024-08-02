@@ -1,12 +1,13 @@
- 
+
 "use client";
 
+import useUser from '@/hooks/userHooks';
 import { useState } from 'react';
-import { register } from '@/services/auth.service';  
 
 const Register = () => {
     const [fullName, setFullName] = useState('');
     const [nif, setNif] = useState('');
+    const { register } = useUser()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('provider');
@@ -28,7 +29,7 @@ const Register = () => {
 
         try {
             await register(userDatas);
-            setLoading(false); 
+            setLoading(false);
         } catch (error: any) {
             setLoading(false);
             console.log(error.message);

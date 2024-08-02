@@ -1,7 +1,8 @@
 "use client";
 
+import useUser from '@/hooks/userHooks';
+import { setLocalStorage } from '@/utils/local-storage';
 import { useState } from 'react';
-import { login } from '@/services/auth.service';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,20 +10,24 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const { login } = useUser()
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     const response = await login(email, password);
-
-    if (response.status === 201) {
-      console.log('Logado com sucesso!');
-      setLoading(false); 
-      console.log(response.data);
-    } else {
-      setLoading(false);
-      console.log(response.response.message)
-      setError(response.data);
+    console.log(response)
+    if (response.data.message === 'Invalid credentials, try again') {
+      setError(response.data.message)
+      //console.log(response)
+      setLoading(false)
+      return
     }
+    //console.log(response)
+   // setLocalStorage('user', response.data)
+    //window.location.href = '/services/list'
+    setError('')
+    setLoading(false)
   };
 
   return (
@@ -55,6 +60,11 @@ const Login = () => {
         <button className='bg-black hover:bg-black/80 transition-all w-full py-2 mt-4 text-lg font-semibold ' type="submit">
           {loading ? 'Entrando...' : 'Login'}
         </button>
+        <br />
+        <br />
+        <center>
+          <a href="/register" className='text-black hover:underline'>Register</a>
+        </center>
       </form>
     </div>
   );

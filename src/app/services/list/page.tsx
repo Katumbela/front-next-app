@@ -11,7 +11,7 @@ import useSWR from 'swr';
 const fetcher = () => getServices();
 
 const ServiceList = () => {
-    const { data, error } = useSWR('/api/services', fetcher);
+    const { data, error } = useSWR('/services', fetcher);
 
     if (error) return <div>Failed to load</div>;
     if (!data) return <div>Loading...</div>;
