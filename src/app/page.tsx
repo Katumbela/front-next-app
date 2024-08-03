@@ -25,7 +25,7 @@ const Login = () => {
     }
     //console.log(response)
    // setLocalStorage('user', response.data)
-    //window.location.href = '/services/list'
+    window.location.href = '/services/list'
     setError('')
     setLoading(false)
   };

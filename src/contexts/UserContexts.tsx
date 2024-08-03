@@ -44,10 +44,12 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
   useEffect(() => {
     //console.log(user)
-    if (!user) {
-      //console.log('Redirecting to /');
-      router.push('/');
-    }
+    window.setTimeout(() => {
+      if (user?.email === '') {
+        //console.log(user?.length);
+        router.push('/');
+      }
+    }, 5000)
     /*if(location.pathname == '/' && user) {
       router.push('/services/list')
     }*/
@@ -69,13 +71,13 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       setLocalStorage('token', access_token);
       setLocalStorage('user', JSON.stringify(user));
       //response.headers['set-cookie'] 
-      const csrfToken = getCookie('X-CSRF-TOKEN');
+      const csrfToken = getCookie('XSRF-TOKEN');
       if (csrfToken) {
-        setLocalStorage('X-CSRF-TOKEN', csrfToken);
+        setLocalStorage('XSRF-TOKEN', csrfToken);
       }
 
       setUser(user);
-      window.location.href = '/services/list'
+      // window.location.href = '/services/list'
       return response;
     } catch (error) {
       console.error('Login failed', error);
