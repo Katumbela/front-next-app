@@ -4,6 +4,6 @@ export interface IUser {
     nif: string
     email: string
     password: string
-    userType: 'Provider' | 'Customer'
+    userType: 'provider' | 'customer'
     balance: number
 }

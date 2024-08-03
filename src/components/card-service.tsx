@@ -45,6 +45,7 @@ const CardService = ({ data, isDashboard }: IC) => {
     };
 
     const handleContract = async () => {
+        alert(data.id)
         try {
             await contractService(data.id, user?.id ? user?.id : 0);
             toast.success("Serviço requisitado com sucesso");
@@ -56,11 +57,11 @@ const CardService = ({ data, isDashboard }: IC) => {
 
 
     return (
-        <div className="bg-white    flex flex-col text-black p-3 rounded-sm ">
+        <div className="bg-white max-w-[22rem] flex flex-col text-black p-3 rounded-sm ">
             <h2 className="font-bold text-lg">{data.title}</h2>
             <p className="text-gray-500 mb-4 text-sm">{data.description}</p>
             <div className="flex mt-auto justify-between">
-                <span className="text-3xl">${data.price}</span>
+                <span className="text-3xl mt-auto">${data.price}</span>
                 <button onClick={handleContract} className="bg-black text-white text-xs px-3 rounded-sm hover:scale-[1.01] transition-all">
                     Contract
                 </button>

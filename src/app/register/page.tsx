@@ -11,7 +11,7 @@ const Register = () => {
     const { register } = useUser()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [userType, setUserType] = useState<'Provider' | 'Customer'>('Provider');
+    const [userType, setUserType] = useState<'provider' | 'customer'>('provider');
     // const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -98,7 +98,7 @@ const Register = () => {
                         id="userType"
                         value={userType}
                         className='border-2 border-gray rounded-sm py-2 px-4 mt-1 outline-none focus:border-black/70 transition-all'
-                        onChange={(e) => setUserType(e.target.value as 'Provider' | 'Customer')}
+                        onChange={(e) => setUserType(e.target.value as 'provider' | 'customer')}
                         required
                     >
                         <option value="Provider">Provider</option>

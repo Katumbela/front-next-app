@@ -15,7 +15,7 @@ const NavBar = () => {
                 <div className="flex gap-3">
                     <span className="text-white my-auto ">{user?.balance} Kz</span>
                     {
-                        user?.userType == 'Provider' ?
+                        user?.userType == 'provider' ?
                             <button onClick={() => GoTo('/my-services')} className="border-white px-1 text-white md:border-2 md:px-4 md:py-2  rounded-sm">
                                 Meus Serviços
                             </button>
@@ -23,7 +23,7 @@ const NavBar = () => {
                             <>
                                 <span className="text-white my-auto">
                                     Preste serviço
-                                </span>  
+                                </span>
                                 <a href="/transactions" className="text-white my-auto">
                                     Historico
                                 </a>
@@ -37,6 +37,15 @@ const NavBar = () => {
                     </button>
                 </div>
             </div>
+            <br />
+            <br />
+            {
+                user?.userType == 'provider' &&
+                <button onClick={() => GoTo('/my-services')} className="border-white px-1 text-white md:border-2 md:px-4 md:py-2  rounded-sm">
+                    Meus Serviços
+                </button>
+            }
+
         </>
     );
 }
