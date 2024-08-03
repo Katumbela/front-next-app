@@ -38,7 +38,7 @@ const ServiceList = () => {
 
             <div className='grid gap-5 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
                 {data.map((service: Service, i) => (
-                    <CardService key={i} data={service} />
+                    <CardService isDashboard={false} key={i} data={service} />
                 ))}
             </div>
         </div>

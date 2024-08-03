@@ -20,8 +20,8 @@ export const updateService = async (id: string, title: string, description: stri
   return authorizedRequest(`${API_URL}/${id}`, 'PATCH', { price, description });
 };
 
-export const contractService = async (id: string, clientId: number, serviceId: number, price: number): Promise<any> => {
-  return authorizedRequest(`${API_URL}/${id}`, 'POST', { clientId, serviceId });
+export const contractService = async (id: string, clientId: number): Promise<any> => {
+  return authorizedRequest(`${env.apiUrl}/transactions/${id}`, 'POST', { clientId, serviceId: id });
 };
 
 export const deleteService = async (id: string): Promise<void> => {

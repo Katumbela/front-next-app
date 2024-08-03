@@ -3,6 +3,7 @@
 
 import useUser from '@/hooks/userHooks';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const Register = () => {
     const [fullName, setFullName] = useState('');
@@ -10,10 +11,12 @@ const Register = () => {
     const { register } = useUser()
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [userType, setUserType] = useState('provider');
+    const [userType, setUserType] = useState<'Provider' | 'Customer'>('Provider');
     // const [balance, setBalance] = useState(0);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -23,16 +26,18 @@ const Register = () => {
             nif,
             email,
             password,
-            userType,
+            userType: userType,
             balance: 5000
         }
 
         try {
             await register(userDatas);
+            toast.success('Seu registro foi efetuado com sucesso ' + fullName)
             setLoading(false);
         } catch (error: any) {
             setLoading(false);
             console.log(error.message);
+            toast.error('Ocorreu um erro')
             setError('Falha ao registrar. Verifique suas informações.' + error.message);
             console.error('Registration error:', error);
         }
@@ -93,11 +98,11 @@ const Register = () => {
                         id="userType"
                         value={userType}
                         className='border-2 border-gray rounded-sm py-2 px-4 mt-1 outline-none focus:border-black/70 transition-all'
-                        onChange={(e) => setUserType(e.target.value)}
+                        onChange={(e) => setUserType(e.target.value as 'Provider' | 'Customer')}
                         required
                     >
-                        <option value="provider">Provider</option>
-                        <option value="consumer">Consumer</option>
+                        <option value="Provider">Provider</option>
+                        <option value="Consumer">Consumer</option>
                     </select>
                 </div>
                 {

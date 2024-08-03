@@ -2,15 +2,17 @@
 import { useState } from "react";
 import useUser from "@/hooks/userHooks";
 import { Service } from "@/infra/interfacess/service";
-import { updateService, deleteService } from "@/services/service.service";
+import { updateService, deleteService, contractService } from "@/services/service.service";
 import EditServiceModal from "./editServiceModal";
+import toast from "react-hot-toast";
 
 
 interface IC {
     data: Service;
+    isDashboard: boolean
 }
 
-const CardService = ({ data }: IC) => {
+const CardService = ({ data, isDashboard }: IC) => {
     const { user } = useUser();
     const [isEditing, setIsEditing] = useState(false);
 
@@ -42,27 +44,38 @@ const CardService = ({ data }: IC) => {
         }
     };
 
+    const handleContract = async () => {
+        try {
+            await contractService(data.id, user?.id ? user?.id : 0);
+            toast.success("Serviço requisitado com sucesso");
+            // Remova o serviço da interface ou faça o que for necessário
+        } catch (error) {
+            console.error("Erro ao contratar o serviço:", error);
+        }
+    };
+
+
     return (
-        <div className="bg-white flex flex-col text-black p-3 rounded-sm ">
+        <div className="bg-white    flex flex-col text-black p-3 rounded-sm ">
             <h2 className="font-bold text-lg">{data.title}</h2>
             <p className="text-gray-500 mb-4 text-sm">{data.description}</p>
             <div className="flex mt-auto justify-between">
                 <span className="text-3xl">${data.price}</span>
-                <button className="bg-black text-white text-xs px-3 rounded-sm hover:scale-[1.01] transition-all">
+                <button onClick={handleContract} className="bg-black text-white text-xs px-3 rounded-sm hover:scale-[1.01] transition-all">
                     Contract
                 </button>
             </div>
-            {user?.id === data.provider?.id && (
+            {user?.id === data.provider?.id && isDashboard && (
                 <div className="flex justify-end gap-2 mt-4">
                     <button
                         onClick={handleEdit}
-                        className="bg-blue-500 text-white text-xs px-3 rounded-sm hover:scale-[1.01] transition-all"
+                        className="bg-blue-500 text-white text-xs py-1 px-3 rounded-sm hover:scale-[1.01] transition-all"
                     >
                         Editar
                     </button>
                     <button
                         onClick={handleDelete}
-                        className="bg-red-500 text-white text-xs px-3 rounded-sm hover:scale-[1.01] transition-all"
+                        className="bg-red-500 text-white text-xs py-1 px-3 rounded-sm hover:scale-[1.01] transition-all"
                     >
                         Excluir
                     </button>

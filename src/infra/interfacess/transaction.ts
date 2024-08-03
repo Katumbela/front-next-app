@@ -1,9 +1,12 @@
+import { IUser } from "./user";
+
 export interface Transaction {
-    id: string;
-    service: string;
-    provider: string;
-    client: string;
+    id: number;
+    service: string; 
+    client: IUser;
     amount: number;
     date: string;
+    serviceId: number
+    provider: IUser
   }
   

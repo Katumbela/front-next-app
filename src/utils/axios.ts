@@ -4,18 +4,17 @@ import { getCookie } from "./cookies";
 
 
 const API_URL = '/api';
- 
-// Função para criar uma instância autorizada do Axios
+  
 const createAuthorizedAxiosInstance = () => {
   const token = getLocalStorage('token');
-  const csrfToken = getCookie('XSRF-TOKEN'); // Verifique se o nome está correto
-  console.log('CSRF Token:', csrfToken);
+  const csrfToken = getCookie('XSRF-TOKEN'); 
+   
 
   const instance = axios.create({
     baseURL: API_URL,
     headers: {
       'Authorization': `Bearer ${token}`,
-      'X-CSRF-TOKEN': csrfToken || '', // Inclua CSRF token se necessário
+      'X-CSRF-TOKEN': csrfToken || '',  
     },
     withCredentials: true,
   });

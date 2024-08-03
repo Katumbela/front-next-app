@@ -1,5 +1,6 @@
 import { Service } from "@/infra/interfacess/service";
 import { useState } from "react";
+import toast from 'react-hot-toast';
 
 interface EditServiceModalProps {
   service: Service;
@@ -14,7 +15,8 @@ const EditServiceModal = ({ service, onClose, onSave }: EditServiceModalProps) =
 
   const handleSave = () => {
     onSave({ ...service, title, description, price });
-    //onClose();
+    toast.success('Serviço alterado com sucess')
+    onClose();
   };
 
   return (

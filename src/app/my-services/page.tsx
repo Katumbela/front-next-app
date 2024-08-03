@@ -35,7 +35,7 @@ const MyServices = () => {
             <NavBar />
 
             <div>
-                <a href="/services/list">Home</a>
+                <a className='bg-white text-black px-2 py-1 mb-4' href="/services/list">Home</a>
                 <h2 className="text-white font-bold text-4xl">
                     Bulir App - My Services
                 </h2>
@@ -44,17 +44,10 @@ const MyServices = () => {
                 </p>
             </div>
             <br />
-            <div>
-                <h2>Cookies:</h2>
-                <ul>
-                    {Object.entries(cookies).map(([name, value]) => (
-                        <li key={name}>{name}: {value}</li>
-                    ))}
-                </ul>
-            </div>
+
             <div className='flex gap-6 flex-wrap sm:flex-nowrap'>
                 {data.filter((e) => e.provider?.id === user?.id).map((service: Service, i) => (
-                    <CardService key={i} data={service} />
+                    <CardService isDashboard={true} key={i} data={service} />
                 ))}
             </div>
         </div>

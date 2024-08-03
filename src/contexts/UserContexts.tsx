@@ -94,8 +94,9 @@ const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }
   };
 
-  const logout = async () => {
+  const logout = () => {
     localStorage.removeItem('user')
+    router.push('/')
   }
 
   return (
