@@ -37,14 +37,15 @@ const NavBar = () => {
                     </button>
                 </div>
             </div>
-            <br />
-            <br />
             {
                 user?.userType == 'provider' &&
-                <button onClick={() => GoTo('/my-services')} className="border-white px-1 text-white md:border-2 md:px-4 md:py-2  rounded-sm">
-                    Meus Serviços
+                <button onClick={() => GoTo('/services/create')} className="border-white px-1 text-white md:border-2 md:px-4 md:py-2  rounded-sm">
+                    Criar Serviço
                 </button>
             }
+
+            <br />
+            <br />
 
         </>
     );
