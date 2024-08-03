@@ -1,3 +1,5 @@
+"use client"
+
 import { Transaction } from '@/infra/interfacess/transaction';
 import { getTransactions } from '@/services/transaction.service';
 import useSWR from 'swr';
@@ -8,7 +10,7 @@ const fetcher = async () => {
 };
 
 const TransactionHistory = () => {
-  const { data, error } = useSWR('/api/transactions', fetcher);
+  const { data, error } = useSWR('/transactions', fetcher);
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
