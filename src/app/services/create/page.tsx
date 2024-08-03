@@ -1,3 +1,5 @@
+"use client"
+
 import { createService } from '@/services/service.service';
 import { isPositiveNumber } from '@/utils/validators';
 import { useState } from 'react';
