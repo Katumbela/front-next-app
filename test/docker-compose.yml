@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+        consistency: delegated
+    working_dir: /app
+    command: yarn dev
