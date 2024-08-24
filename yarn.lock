@@ -1237,6 +1237,13 @@ get-tsconfig@^4.5.0:
   dependencies:
     resolve-pkg-maps "^1.0.0"
 
+git-commit-lib@^1.0.8, git-commit-lib@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/git-commit-lib/-/git-commit-lib-1.1.1.tgz"
+  integrity sha512-m0b8OqH6HzAciMiHXwSQ25rMsVqpnNq06c+BONGrHypEMR+TqXwGVVznyTpQxb5I2jE5TgPnOPeQAxI0o0KIJQ==
+  dependencies:
+    git-commit-lib "^1.0.8"
+
 glob-parent@^5.1.2, glob-parent@~5.1.2:
   version "5.1.2"
   resolved "https://registry.npmjs.org/glob-parent/-/glob-parent-5.1.2.tgz"
